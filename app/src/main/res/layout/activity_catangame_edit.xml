@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+  >
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/game_name_label"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/game_name_label"
+      android:textSize="18sp"
+      />
+
+    <Button
+      android:id="@+id/pick_data_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/catangame_edit_pick_date_button"/>
+
+    <Button
+      android:id="@+id/pick_winner_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/catangame_edit_pick_winner"/>
+
+    <Button
+      android:id="@+id/pick_players_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/catangame_edit_pick_players"/>
+
+    <LinearLayout
+      android:id="@+id/players_holder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      </LinearLayout>
+
+  </LinearLayout>
+</ScrollView>

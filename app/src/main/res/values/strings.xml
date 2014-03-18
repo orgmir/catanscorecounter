@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Catan Score Counter</string>
+  <string name="title_catangame_detail">CatanGame Detail</string>
+  <string name="menu_players_list_title">Players List</string>
+  <string name="menu_new_player_title">New Player</string>
+  <string name="menu_new_game_title">New Game</string>
+  <string name="player_edit_save_button">Save Player</string>
+  <string name="title_catan_player_edit">Catan Player Edit</string>
+  <string name="player_name_label">Player Name:</string>
+  <string name="title_catan_player_list">Players List</string>
+  <string name="game_name_label">Catan Game</string>
+  <string name="catangame_edit_pick_date_button">Pick Game Date</string>
+  <string name="catangame_edit_pick_winner">Pick Winner</string>
+  <string name="catangame_edit_pick_players">Pick Players</string>
+  <string name="title_catangame_edit">Catan Game Edit</string>
+  <string name="menu_save_game_title">Save Game</string>
+
+</resources>
