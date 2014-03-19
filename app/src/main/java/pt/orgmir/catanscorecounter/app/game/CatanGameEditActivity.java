@@ -23,6 +23,7 @@ import java.util.Locale;
 import pt.orgmir.catanscorecounter.app.R;
 import pt.orgmir.catanscorecounter.app.data.IDataManager;
 import pt.orgmir.catanscorecounter.app.data.entities.CatanGame;
+import pt.orgmir.catanscorecounter.app.game.fragments.CatanGameDetailFragment;
 import pt.orgmir.catanscorecounter.app.game.fragments.DatePickerFragment;
 
 /**
@@ -42,12 +43,22 @@ public class CatanGameEditActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_catangame_edit);
 
-
-    game = new CatanGame();
-
     dateButton = (Button) findViewById(R.id.pick_data_button);
     winnerButton = (Button) findViewById(R.id.pick_winner_button);
     playersButton = (Button) findViewById(R.id.pick_players_button);
+
+    CharSequence gameIdSequence = getIntent().getCharSequenceExtra(CatanGameDetailFragment.ARG_ITEM_ID);
+    if(gameIdSequence != null){
+      game = IDataManager.getManager().getCatanGame(gameIdSequence.toString());
+      if(game.playedOn != null){
+        dateButton.setText(dateButtonTextForDate(game.playedOn));
+      }
+      //TODO finish overriding values
+    }else{
+      game = new CatanGame();
+    }
+
+
 
     setDateButtonClickListener();
     setWinnerButtonClickListener();
@@ -85,8 +96,7 @@ public class CatanGameEditActivity extends Activity {
             c.set(year, monthOfYear, dayOfMonth);
             CatanGameEditActivity.this.game.playedOn = c.getTime();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-            CatanGameEditActivity.this.dateButton.setText("Game Date: " + dateFormat.format(CatanGameEditActivity.this.game.playedOn));
+            CatanGameEditActivity.this.dateButton.setText(dateButtonTextForDate(CatanGameEditActivity.this.game.playedOn));
           }
         });
         newFragment.show(getFragmentManager(), "datePicker");
@@ -100,6 +110,11 @@ public class CatanGameEditActivity extends Activity {
 
   private void setPlayersButtonClickListener(){
 
+  }
+
+  private String dateButtonTextForDate(Date date){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+    return "Game Date: " + dateFormat.format(date);
   }
 
 }

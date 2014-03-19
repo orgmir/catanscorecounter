@@ -65,7 +65,7 @@ public class DataManager extends IDataManager {
   public void saveCatanGame(CatanGame game) {
     if(game.id == null || game.id.isEmpty()){
       master.gameIdCounter ++;
-      game.id = master.playerIdCounter + "";
+      game.id = master.gameIdCounter + "";
     }
     master.catanGamesMap.put(game.id, game);
     saveMaster();

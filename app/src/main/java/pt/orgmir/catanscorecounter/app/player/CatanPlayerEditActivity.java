@@ -29,7 +29,11 @@ public class CatanPlayerEditActivity extends Activity {
     setContentView(R.layout.activity_catanplayer_edit);
 
     String playerString = getIntent().getStringExtra("catanPlayer");
-    player = new Gson().fromJson(playerString, CatanPlayer.class);
+    if(playerString != null) {
+      player = new Gson().fromJson(playerString, CatanPlayer.class);
+    }else{
+      player = new CatanPlayer();
+    }
 
     editText = (EditText) findViewById(R.id.edit_text);
     saveButton = (Button) findViewById(R.id.save_button);

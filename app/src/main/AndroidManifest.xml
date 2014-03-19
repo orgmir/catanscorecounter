@@ -44,6 +44,7 @@
     <activity
       android:name=".player.CatanPlayerEditActivity"
       android:label="@string/title_catan_player_edit"
+      android:windowSoftInputMode="stateVisible"
       android:parentActivityName=".player.CatanPlayerListActivity" >
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"

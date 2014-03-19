@@ -1,24 +1,32 @@
 package pt.orgmir.catanscorecounter.app.game.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import java.util.zip.Inflater;
 
 import pt.orgmir.catanscorecounter.app.R;
 import pt.orgmir.catanscorecounter.app.data.IDataManager;
 import pt.orgmir.catanscorecounter.app.data.entities.CatanGame;
+import pt.orgmir.catanscorecounter.app.data.entities.CatanPlayer;
 import pt.orgmir.catanscorecounter.app.dummy.DummyContent;
 import pt.orgmir.catanscorecounter.app.game.CatanGameEditActivity;
 import pt.orgmir.catanscorecounter.app.player.CatanPlayerListActivity;
@@ -94,7 +102,7 @@ public class CatanGameListFragment extends ListFragment {
     super.onResume();
 
     games = IDataManager.getManager().getCatanGames();
-    setListAdapter(new ArrayAdapter<CatanGame>(getActivity(),
+    setListAdapter(new CatanGameArrayAdapter(getActivity(),
         android.R.layout.simple_list_item_activated_1,
         android.R.id.text1, games));
   }
@@ -134,7 +142,7 @@ public class CatanGameListFragment extends ListFragment {
   public void onListItemClick(ListView listView, View view, int position, long id) {
     super.onListItemClick(listView, view, position, id);
 
-    mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+    mCallbacks.onItemSelected(games.get(position).id);
   }
 
   @Override
@@ -203,5 +211,37 @@ public class CatanGameListFragment extends ListFragment {
   private void playerList(){
     Intent intent = new Intent(this.getActivity(), CatanPlayerListActivity.class);
     this.getActivity().startActivity(intent);
+  }
+
+  private class CatanGameArrayAdapter extends ArrayAdapter<CatanGame>{
+
+    public CatanGameArrayAdapter(Context context, int resource, int textViewResourceId, List<CatanGame> games) {
+      super(context, resource, textViewResourceId, games);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+      if(convertView == null){
+        convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_activated_1, parent, false);
+      }
+
+      TextView text = (TextView) convertView.findViewById(android.R.id.text1);
+      CatanGame game = getItem(position);
+      CatanPlayer winner = IDataManager.getManager().getCatanPlayer(game.winnerId);
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM", Locale.US);
+
+      String winnerName = "";
+      if(winner != null){
+        winnerName = winner.name.toUpperCase();
+      }
+      String date = "";
+      if(game.playedOn != null){
+        date = dateFormat.format(game.playedOn);
+      }
+
+      text.setText("Game #" + game.id +" "+ winnerName +" "+ date);
+
+      return convertView;
+    }
   }
 }

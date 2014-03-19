@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.gson.Gson;
+
 import pt.orgmir.catanscorecounter.app.R;
 import pt.orgmir.catanscorecounter.app.data.IDataManager;
 import pt.orgmir.catanscorecounter.app.game.fragments.CatanGameDetailFragment;
@@ -81,7 +83,7 @@ public class CatanGameListActivity extends FragmentActivity
     } else {
       // In single-pane mode, simply start the detail activity
       // for the selected item ID.
-      Intent detailIntent = new Intent(this, CatanGameDetailActivity.class);
+      Intent detailIntent = new Intent(this, CatanGameEditActivity.class);
       detailIntent.putExtra(CatanGameDetailFragment.ARG_ITEM_ID, id);
       startActivity(detailIntent);
     }
